@@ -1,9 +1,8 @@
 <script>
-let name = 'Conn';
+import AppLayout from '../Layouts/AppLayout.svelte';
+export let user;
 </script>
 
-<style>
-
-</style>
-
-<div class="name"><div class="alert alert-success">Welcome: {name}</div></div>
+<AppLayout>
+    <div class="name"><div class="alert alert-success">Welcome {user}!</div></div>
+</AppLayout>

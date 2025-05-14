@@ -1,0 +1,54 @@
+---
+services:
+  app:
+    container_name: rex-app
+    networks:
+    - quick-dev-network
+    volumes:
+    - "./:/app"
+    stdin_open: true
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    ports:
+    - 5173:5173
+    build:
+      context: "/home/conn/dev/.docker/images/php"
+      target: laravel
+      args:
+        PHP_VERSION: 8.4
+    image: quick-dev:rex-app
+  db:
+    container_name: rex-db
+    networks:
+    - quick-dev-network
+    volumes: []
+    stdin_open: true
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    image: mariadb:latest
+    ports:
+    - 3336:3306
+    command:
+    - "--character-set-server=utf8mb4"
+    - "--collation-server=utf8mb4_bin"
+    - "--innodb_file_per_table=On"
+    - "--wait-timeout=28800"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: main
+  cache:
+    container_name: rex-cache
+    networks:
+    - quick-dev-network
+    volumes: []
+    stdin_open: true
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    image: redis:latest
+    ports:
+    - 6379:6379
+networks:
+  quick-dev-network:
+    external: true

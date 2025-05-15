@@ -7,6 +7,7 @@
   data.loginRoute = $page.props.route.login;
   data.registerRoute = $page.props.route.register;
   data.logoutRoute = $page.props.route.logout;
+  data.dashboardRoute = $page.props.route.dashboard;
   data.csrf = $page.props.app.csrf;
   export let children;
 
@@ -19,7 +20,9 @@
 
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="{data.url}">{data.name}</a>
+        <a class="navbar-brand" href="{data.url}">
+            <img class="logo" src="/images/logo-with-text-wide.png" alt="logo">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,6 +45,7 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{data.user.name}</a>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{data.dashboardRoute}">Dashboard</a>
                             <a class="dropdown-item" href="{data.logoutRoute}" on:click={handleLogout}>Logout</a>
                             <form id="logout-form" action="{data.logoutRoute}" method="POST" class="d-none">
                                 <input type="hidden" name="_token" value="{data.csrf}" autocomplete="off">
@@ -54,6 +58,6 @@
     </div>
 </nav>
 
-<main><slot/></main>
+<main class="p-4"><slot/></main>
 
 <footer>Bye</footer>

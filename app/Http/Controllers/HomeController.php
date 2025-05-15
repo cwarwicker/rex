@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\LayoutHelper;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -19,12 +17,12 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application home page.
      *
      */
     public function index()
     {
-        return Inertia::render('Welcome', [
+        return Inertia::render('App', [
             'user' => 'ME'
         ]);
     }
